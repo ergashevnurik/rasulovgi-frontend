@@ -1,0 +1,220 @@
+import React, { Component } from "react";
+import WarehouseDataService from "./services/warehouse.service";
+
+export default class Warehouse extends Component {
+  constructor(props) {
+    super(props);
+    this.onChangeName = this.onChangeName.bind(this);
+    this.onChangeLocation = this.onChangeLocation.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.getWarehouse = this.getWarehouse.bind(this);
+    this.updateActive = this.updateActive.bind(this);
+    this.updateWarehouse = this.updateWarehouse.bind(this);
+    this.deleteWarehouse = this.deleteWarehouse.bind(this);
+
+    this.state = {
+      currentWarehouse: {
+        id: null,
+        name: "",
+        location: "",
+        description: "",
+        active: false
+      },
+      message: ""
+    };
+  }
+
+  componentDidMount() {
+    console.log(this.props.match.params.id);
+    this.getWarehouse(this.props.match.params.id);
+  }
+
+  onChangeName(e) {
+    const name = e.target.value;
+
+    this.setState(function(prevState) {
+      return {
+        currentWarehouse: {
+          ...prevState.currentWarehouse,
+          name: name
+        }
+      };
+    });
+  }
+
+  onChangeLocation(e) {
+    const location = e.target.value;
+    
+    this.setState(prevState => ({
+      currentWarehouse: {
+        ...prevState.currentWarehouse,
+        location: location
+      }
+    }));
+  }
+
+  onChangeDescription(e) {
+    const description = e.target.value;
+    
+    this.setState(prevState => ({
+      currentWarehouse: {
+        ...prevState.currentWarehouse,
+        description: description
+      }
+    }));
+  }
+
+  getWarehouse(id) {
+    WarehouseDataService.get(id)
+      .then(response => {
+        this.setState({
+          currentWaregetWarehouse: response.data
+        });
+        console.log("DATA: " + response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  updateActive(status) {
+    var data = {
+      id: this.state.currentWarehouse.id,
+      name: this.state.currentWarehouse.name,
+      location: this.state.currentWarehouse.location,
+      description: this.state.currentWarehouse.description,
+      published: status
+    };
+
+    WarehouseDataService.update(this.state.currentWarehouse.id, data)
+      .then(response => {
+        this.setState(prevState => ({
+          currentWarehouse: {
+            ...prevState.currentWarehouse,
+            published: status
+          }
+        }));
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  updateWarehouse() {
+    WarehouseDataService.update(
+      this.state.currentWarehouse.id,
+      this.state.currentWarehouse
+    )
+      .then(response => {
+        console.log(response.data);
+        this.setState({
+          message: "The warehouse was updated successfully!"
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  deleteWarehouse() {    
+    WarehouseDataService.delete(this.state.currentWarehouse.id)
+      .then(response => {
+        console.log(response.data);
+        this.props.history.push('/warehouses')
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  render() {
+    const { currentWarehouse } = this.state;
+
+    return (
+      <div>
+        {currentWarehouse ? (
+          <div className="edit-form">
+            <h4>Warehouse</h4>
+            <form>
+              <div className="form-group">
+                <label htmlFor="name">Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="name"
+                  value={currentWarehouse.name}
+                  onChange={this.onChangeName}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="location">Location</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="location"
+                  value={currentWarehouse.location}
+                  onChange={this.onChangeLocation}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="description">Description</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="description"
+                  value={currentWarehouse.description}
+                  onChange={this.onChangeDescription}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>
+                  <strong>Status:</strong>
+                </label>
+                {currentWarehouse.published ? "Active" : "Unactive"}
+              </div>
+            </form>
+
+            {currentWarehouse.active ? (
+              <button
+                className="badge badge-primary mr-2"
+                onClick={() => this.updateActive(false)}
+              >
+                UnActive
+              </button>
+            ) : (
+              <button
+                className="badge badge-primary mr-2"
+                onClick={() => this.updateActive(true)}
+              >
+                Publish
+              </button>
+            )}
+
+            <button
+              className="badge badge-danger mr-2"
+              onClick={this.deleteWarehouse}
+            >
+              Delete
+            </button>
+
+            <button
+              type="submit"
+              className="badge badge-success"
+              onClick={this.updateWarehouse}
+            >
+              Update
+            </button>
+            <p>{this.state.message}</p>
+          </div>
+        ) : (
+          <div>
+            <br />
+            <p>Please click on a Warehouse...</p>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
