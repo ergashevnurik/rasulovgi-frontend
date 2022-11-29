@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import WarehouseDataService from "./services/warehouse.service";
+import AuthService from "../../services/auth.service";
+import { Navigate } from "react-router-dom";
 
 export default class Warehouse extends Component {
   constructor(props) {
@@ -20,11 +22,17 @@ export default class Warehouse extends Component {
         description: "",
         active: false
       },
-      message: ""
+      message: "",
+      currentUser: { username: "" }
     };
   }
 
   componentDidMount() {
+    const currentUser = AuthService.getCurrentUser();
+
+    if (!currentUser) this.setState({ redirect: "/" });
+    this.setState({ currentUser: currentUser, userReady: true })
+
     console.log(this.props.match.params.id);
     this.getWarehouse(this.props.match.params.id);
   }
@@ -129,6 +137,12 @@ export default class Warehouse extends Component {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Navigate to={this.state.redirect} />
+    }
+
+    const { currentUser } = this.state;
+
     const { currentWarehouse } = this.state;
 
     return (

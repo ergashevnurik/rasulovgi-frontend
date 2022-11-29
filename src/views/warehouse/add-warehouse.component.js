@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import WarehouseDataService from "./services/warehouse.service";
+import AuthService from "../../services/auth.service";
+import { Navigate } from "react-router-dom";
+import Navbar from '../../components/navbar/navbar';
+import Sidebar from "../../components/sidebar/index";
 
 export default class AddWarehouse extends Component {
   constructor(props) {
@@ -17,8 +21,17 @@ export default class AddWarehouse extends Component {
       description: "", 
       active: false,
 
-      submitted: false
+      submitted: false,
+      currentUser: { username: "" }
     };
+  }
+
+  componentDidMount() {
+    const currentUser = AuthService.getCurrentUser();
+
+    if (!currentUser) this.setState({ redirect: "/" });
+    this.setState({ currentUser: currentUser, userReady: true })
+
   }
 
   onChangeName(e) {
@@ -77,62 +90,82 @@ export default class AddWarehouse extends Component {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Navigate to={this.state.redirect} />
+    }
+
+    const { currentUser } = this.state;
+
     return (
-      <div className="submit-form">
-        {this.state.submitted ? (
-          <div>
-            <h4>You submitted successfully!</h4>
-            <button className="btn btn-success" onClick={this.newWarehouse}>
-              Add
-            </button>
+      <section className="warehouse-list-section">
+        <div className="">
+          <div className="row m-0 p-0">
+            <div className="col-md-2 m-0 p-0">
+              <Sidebar />
+            </div>
+            <div className="col-md-10 m-0 p-0">
+              <Navbar />
+              <div className="container p-3">
+                <div className="submit-form">
+                  {this.state.submitted ? (
+                    <div>
+                      <h4>You submitted successfully!</h4>
+                      <button className="btn btn-success" onClick={this.newWarehouse}>
+                        Add
+                      </button>
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="form-group">
+                        <label htmlFor="name">Name</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="name"
+                          required
+                          value={this.state.name}
+                          onChange={this.onChangeName}
+                          name="name"
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="location">Location</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="location"
+                          required
+                          value={this.state.location}
+                          onChange={this.onChangeLocation}
+                          name="location"
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="description">Description</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="description"
+                          required
+                          value={this.state.description}
+                          onChange={this.onChangeDescription}
+                          name="description"
+                        />
+                      </div>
+
+                      <button onClick={this.saveWarehouse} className="btn btn-success">
+                        Submit
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
-        ) : (
-          <div>
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                required
-                value={this.state.name}
-                onChange={this.onChangeName}
-                name="name"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="location">Location</label>
-              <input
-                type="text"
-                className="form-control"
-                id="location"
-                required
-                value={this.state.location}
-                onChange={this.onChangeLocation}
-                name="location"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="description">Description</label>
-              <input
-                type="text"
-                className="form-control"
-                id="description"
-                required
-                value={this.state.description}
-                onChange={this.onChangeDescription}
-                name="description"
-              />
-            </div>
-
-            <button onClick={this.saveWarehouse} className="btn btn-success">
-              Submit
-            </button>
-          </div>
-        )}
-      </div>
+        </div>
+      </section>
     );
   }
 }

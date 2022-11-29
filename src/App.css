@@ -1,24 +1,33 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
 label {
   display: block;
   margin-top: 10px;
 }
 
 .card-container.card {
-  max-width: 350px !important;
+  /* max-width: 350px !important; */
   padding: 40px 40px;
+  border: 0;
+  outline: 0;
 }
 
 .card {
-  background-color: #f7f7f7;
+  /* background-color: #fff;
   padding: 20px 25px 30px;
   margin: 0 auto 25px;
   margin-top: 50px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
-  border-radius: 2px;
-  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 2px; */
+  /* -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */
+  
+  
 }
 
 .profile-img-card {
@@ -30,3 +39,104 @@ label {
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
+
+/* Auth Section Style Goes Here */
+.auth-section {
+  height: 100vh;
+}
+
+.auth-section .row, .auth-section .row .col-md-6 {
+  height: 100%;
+}
+
+.auth-section .row .col-md-6 .sign-in-auth-bg {
+  background-image: url(./img/auth-section-bg.webp);
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  border-bottom-left-radius: 250px;
+  position: relative;
+}
+
+.auth-section .row .col-md-6 .sign-in-auth-bg::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-bottom-left-radius: 250px;
+}
+
+.auth-section .row .col-md-6 .sign-in-auth-bg .logo {
+  background-image: url(./img/logo.svg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 450px;
+  height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form-container {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.form-container .card {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-container .card form {
+  width: 450px;
+}
+
+.form-container .card form .text-wrapper p {
+  color: rgb(118, 114, 114)
+}
+
+.btn-styled {
+  background: #ff9021!important;
+  color: white;
+}
+
+.form-container .card form input, .form-container .card form button {
+  border-radius: 25px;
+}
+
+.no-focus:focus, .no-focus:checked {
+  outline: 0;
+  border: 0;
+  box-shadow: unset;
+}
+/* Auth Section Style Ends Here */
+
+
+/* Aside Section Style Goes Here */
+.aside-section {
+  height: 100vh;
+  background-color: whitesmoke;
+}
+/* Aside Section Style Ends Here */
+
+
+/* Navbar Section Style Goes Here */
+.navbar {
+  background-color: whitesmoke;
+}
+/* Navbar Section Style Ends Here */
