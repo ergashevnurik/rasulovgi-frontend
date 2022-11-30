@@ -21,6 +21,7 @@ import Navbar from "./components/navbar/navbar";
 import AddUser from "./views/user/add-user.component";
 import UsersList from "./views/user/user-list.component";
 import User from "./views/user/user.component";
+import Navbar1 from "./components/navbar/navbar1";
 
 class App extends Component {
   
@@ -30,7 +31,6 @@ class App extends Component {
 
     return (
       <div>
-
         <div>
           <Routes>
             <Route path="/" element={<Login />} />
