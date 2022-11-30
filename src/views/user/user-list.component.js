@@ -6,6 +6,12 @@ import AuthService from "../../services/auth.service";
 import { Navigate } from "react-router-dom";
 import Navbar from '../../components/navbar/navbar';
 import Sidebar from "../../components/sidebar/index";
+import AddUser from "./add-user.component";
+import { Table } from "react-bootstrap";
+// Bootstrap CSS
+import "bootstrap/dist/css/bootstrap.min.css";
+// To make rows collapsible
+import "bootstrap/js/src/collapse.js";
 
 
 export default class UsersList extends Component {
@@ -162,81 +168,82 @@ export default class UsersList extends Component {
             </div>
             <div className="col-md-10 m-0 p-0">
               <Navbar />
-              <div className="container p-3">
-                <div className="input-group mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search by name"
-                    value={searchUsername}
-                    onChange={this.onChangeSearchUsername}
-                  />
-                  <div className="input-group-append">
-                    <button
-                      className="btn btn-outline-secondary"
-                      type="button"
-                      onClick={this.retrieveUsers}
-                    >
-                      Search
-                    </button>
-                  </div>
-                </div>
+              <div className="container-fluid p-3">
+
                 <div className="row">
-                  <div className="col-md-6">
-                    <h4>Users List</h4>
+                  <div className="col-md-12">
+                    <div className="">
 
-                    <div className="mt-3">
-                      {"Items per Page: "}
-                      <select onChange={this.handlePageSizeChange} value={pageSize}>
-                        {this.pageSizes.map((size) => (
-                          <option key={size} value={size}>
-                            {size}
-                          </option>
-                        ))}
-                      </select>
+                      <div className="d-flex align-items-center justify-content-center">
+                        <Link to={"/user-add"} className="btn btn-success mr-2">Add User</Link>
 
-                      <Pagination
-                        className="my-3"
-                        count={count}
-                        page={page}
-                        siblingCount={1}
-                        boundaryCount={1}
-                        variant="outlined"
-                        shape="rounded"
-                        onChange={this.handlePageChange}
-                      />
+                        <button className="btn btn-danger mr-2" onClick={this.removeAllUsers}>
+                          Remove All
+                        </button>
+
+                        <div className="input-group mr-2" style={{width: "unset"}}>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Search by name"
+                            value={searchUsername}
+                            onChange={this.onChangeSearchUsername}
+                          />
+                          <div className="input-group-append">
+                            <button
+                              className="btn btn-outline-secondary"
+                              type="button"
+                              onClick={this.retrieveUsers}
+                            >
+                              Search
+                            </button>
+                          </div>
+                        </div>
+
+                        <p className="ml-auto my-0 mr-2">{"Items per Page: "}</p>
+                        <select onChange={this.handlePageSizeChange} value={pageSize} className="btn btn-outline-info">
+                          {this.pageSizes.map((size) => (
+                            <option key={size} value={size}>
+                              {size}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
 
-                    <table className="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Username</th>
-                          <th>Email</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
+                    <Table striped bordered hover className="my-3">
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+
                         {users &&
                           users.map((user, index) => (
-                          <tr className={"list-group-item " + (index === currentIndex ? "active" : "")} onClick={() => this.setActiveUser(user, index)} key={index}>
-                            <td>{user.id}</td>
-                            <td>{user.username}</td>
-                            <td>{user.email}</td>
-                          </tr>
+                            <tbody key={index}>
+                              <tr data-toggle="collapse" data-target={'.multi-collapse' + (index)} aria-controls={'multiCollapseExample' + (index)} className={(index === currentIndex ? "active" : "")} onClick={() => this.setActiveUser(user, index)}>
+                                <td>{user.id}</td>
+                                <td>{user.username}</td>
+                                <td>{user.email}</td>
+                                <td></td>
+                              </tr>
+                              <tr className={'collapse multi-collapse' + (index)} id={'multiCollapseExample' + (index)}>
+                                  <td></td>
+                                  <td>{user.active}</td>
+                                  <td>{user.password}</td>
+                                  <td></td>
+                              </tr>
+                            </tbody>
                         ))}
-                      </tbody>
-                    </table>
+                      
+                    </Table>
 
-                    <button
-                      className="m-3 btn btn-sm btn-danger"
-                      onClick={this.removeAllUsers}
-                    >
-                      Remove All
-                  </button>
-                </div>
-                <div className="col-md-6">
-                  {currentUser ? (
+                    <Pagination className="my-3" count={count} page={page} siblingCount={1} boundaryCount={1} variant="outlined" shape="rounded" onChange={this.handlePageChange} />
+
+                  {/* {currentUser ? (
                     <div>
                       <h4>User</h4>
                       <div>
@@ -261,7 +268,7 @@ export default class UsersList extends Component {
                         <label>
                           <strong>Status:</strong>
                         </label>{" "}
-                        {currentUser.published ? "Published" : "Pending"}
+                        {currentUser.active ? "Active" : "Disactive"}
                       </div>
 
                       <Link
@@ -276,7 +283,7 @@ export default class UsersList extends Component {
                       <br />
                       <p>Please click on a User...</p>
                     </div>
-                  )}
+                  )} */}
                   </div>
                 </div>
               </div>
