@@ -18,6 +18,9 @@ import WarehousesList from "./views/warehouse/warehouse-list.component";
 import AddWarehouse from "./views/warehouse/add-warehouse.component";
 import Warehouse from "./views/warehouse/warehouse.component";
 import Navbar from "./components/navbar/navbar";
+import AddUser from "./views/user/add-user.component";
+import UsersList from "./views/user/user-list.component";
+import User from "./views/user/user.component";
 
 class App extends Component {
   
@@ -35,8 +38,14 @@ class App extends Component {
             {/* Warehouse Routes Goes Here */}
             <Route path="/warehouse" element={<WarehousesList />} />
             <Route path="/warehouse-add" element={<AddWarehouse/>} />
-            <Route path="/warehouse/:id" exact element={<Warehouse/>} />
+            <Route path="/warehouse/:id" element={<Warehouse/>} />
             {/* Warehouse Routes Ends Here */}
+
+            {/* User Routes Goes Here */}
+            <Route path="/user" element={<UsersList />} />
+            <Route path="/user-add" element={<AddUser/>} />
+            <Route path="/user/:id" element={<User/>} />
+            {/* User Routes Ends Here */}
 
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

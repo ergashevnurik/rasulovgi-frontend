@@ -25,7 +25,7 @@ export default class Sidebar extends Component {
           </Link>
         </div>
         <div className='row px-3 py-2'>
-          <Link to={"/users"} className="btn w-100 text-left text-dark d-flex align-items-center">
+          <Link to={"/user"} className="btn w-100 text-left text-dark d-flex align-items-center">
             <FiUsers className='mx-2' />Users
           </Link>
         </div>

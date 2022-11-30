@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import WarehouseDataService from "./services/warehouse.service";
+import WarehouseDataService from "./services/user.service";
 import AuthService from "../../services/auth.service";
 import { Navigate } from "react-router-dom";
 
-export default class Warehouse extends Component {
+export default class User extends Component {
   constructor(props) {
     super(props);
     this.onChangeName = this.onChangeName.bind(this);
@@ -91,7 +91,7 @@ export default class Warehouse extends Component {
       name: this.state.currentWarehouse.name,
       location: this.state.currentWarehouse.location,
       description: this.state.currentWarehouse.description,
-      active: status
+      published: status
     };
 
     WarehouseDataService.update(this.state.currentWarehouse.id, data)
@@ -99,7 +99,7 @@ export default class Warehouse extends Component {
         this.setState(prevState => ({
           currentWarehouse: {
             ...prevState.currentWarehouse,
-            active: status
+            published: status
           }
         }));
         console.log(response.data);
@@ -186,7 +186,7 @@ export default class Warehouse extends Component {
                 <label>
                   <strong>Status:</strong>
                 </label>
-                {currentWarehouse.active ? "Active" : "Unactive"}
+                {currentWarehouse.published ? "Active" : "Unactive"}
               </div>
             </form>
 

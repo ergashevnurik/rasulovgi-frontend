@@ -3,27 +3,27 @@ import authHeader from '../../../services/auth-header';
 
 class WarehouseDataService {
   getAll(params) {
-    return http.get("/warehouses", { params }, { headers: authHeader() });
+    return http.get("/warehouses", { params });
   }
 
   get(id) {
-    return http.get(`/warehouses/${id}`, { headers: authHeader() });
+    return http.get(`/warehouses/${id}`);
   }
 
   create(data) {
-    return http.post("/warehouses", data, { headers: authHeader() });
+    return http.post("/warehouses", data);
   }
 
   update(id, data) {
-    return http.put(`/warehouses/${id}`, data, { headers: authHeader() });
+    return http.put(`/warehouses/${id}`, data);
   }
 
   delete(id) {
-    return http.delete(`/warehouses/${id}`, { headers: authHeader() });
+    return http.delete(`/warehouses/${id}`);
   }
 
   deleteAll() {
-    return http.delete("/warehouses", { headers: authHeader() });
+    return http.delete("/warehouses");
   }
 }
 

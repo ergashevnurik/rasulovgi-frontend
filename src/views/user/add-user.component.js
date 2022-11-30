@@ -1,24 +1,24 @@
 import React, { Component } from "react";
-import WarehouseDataService from "./services/warehouse.service";
+import UserDataService from "./services/user.service";
 import AuthService from "../../services/auth.service";
 import { Navigate } from "react-router-dom";
 import Navbar from '../../components/navbar/navbar';
 import Sidebar from "../../components/sidebar/index";
 
-export default class AddWarehouse extends Component {
+export default class AddUser extends Component {
   constructor(props) {
     super(props);
-    this.onChangeName = this.onChangeName.bind(this);
-    this.onChangeLocation = this.onChangeLocation.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.saveWarehouse = this.saveWarehouse.bind(this);
-    this.newWarehouse = this.newWarehouse.bind(this);
+    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.saveUser = this.saveUser.bind(this);
+    this.newUser = this.newUser.bind(this);
 
     this.state = {
       id: null,
-      name: "",
-      location: "",
-      description: "", 
+      username: "",
+      password: "",
+      email: "",
       active: false,
 
       submitted: false,
@@ -34,38 +34,38 @@ export default class AddWarehouse extends Component {
 
   }
 
-  onChangeName(e) {
+  onChangeUsername(e) {
     this.setState({
-      name: e.target.value
+      username: e.target.value
     });
   }
 
-  onChangeLocation(e) {
+  onChangePassword(e) {
     this.setState({
-      location: e.target.value
+      password: e.target.value
     });
   }
 
-  onChangeDescription(e) {
+  onChangeEmail(e) {
     this.setState({
-      description: e.target.value
+      email: e.target.value
     });
   }
 
-  saveWarehouse() {
+  saveUser() {
     var data = {
-      name: this.state.name,
-      location: this.state.location,
-      description: this.state.description
+      username: this.state.username,
+      password: this.state.password,
+      email: this.state.email
     };
 
-    WarehouseDataService.create(data)
+    UserDataService.create(data)
       .then(response => {
         this.setState({
           id: response.data.id,
-          name: response.data.name,
-          location: response.data.location,
-          description: response.data.description,
+          username: response.data.username,
+          password: response.data.password,
+          email: response.data.email,
           active: response.data.active,
 
           submitted: true
@@ -77,12 +77,12 @@ export default class AddWarehouse extends Component {
       });
   }
 
-  newWarehouse() {
+  newUser() {
     this.setState({
       id: null,
-      name: "",
-      location: "",
-      description: "",
+      username: "",
+      password: "",
+      email: "",
       active: false,
 
       submitted: false
@@ -110,52 +110,52 @@ export default class AddWarehouse extends Component {
                   {this.state.submitted ? (
                     <div>
                       <h4>You submitted successfully!</h4>
-                      <button className="btn btn-success" onClick={this.newWarehouse}>
+                      <button className="btn btn-success" onClick={this.newUser}>
                         Add
                       </button>
                     </div>
                   ) : (
                     <div>
                       <div className="form-group">
-                        <label htmlFor="name">Name</label>
+                        <label htmlFor="username">Username</label>
                         <input
                           type="text"
                           className="form-control"
-                          id="name"
+                          id="username"
                           required
-                          value={this.state.name}
-                          onChange={this.onChangeName}
-                          name="name"
+                          value={this.state.username}
+                          onChange={this.onChangeUsername}
+                          name="username"
                         />
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="location">Location</label>
+                        <label htmlFor="password">Password</label>
                         <input
                           type="text"
                           className="form-control"
-                          id="location"
+                          id="password"
                           required
-                          value={this.state.location}
-                          onChange={this.onChangeLocation}
-                          name="location"
+                          value={this.state.password}
+                          onChange={this.onChangePassword}
+                          name="password"
                         />
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="description">Description</label>
+                        <label htmlFor="email">Email</label>
                         <input
                           type="text"
                           className="form-control"
-                          id="description"
+                          id="email"
                           required
-                          value={this.state.description}
-                          onChange={this.onChangeDescription}
-                          name="description"
+                          value={this.state.email}
+                          onChange={this.onChangeEmail}
+                          name="email"
                         />
                       </div>
 
-                      <button onClick={this.saveWarehouse} className="btn btn-success">
+                      <button onClick={this.saveUser} className="btn btn-success">
                         Submit
                       </button>
                     </div>
