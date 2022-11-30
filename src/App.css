@@ -139,6 +139,7 @@ label {
 .navbar {
   background-color: whitesmoke;
 }
+/* 
 :root {
   --mainColor: #29335C;
   --mainColorLight: #5767aa;
@@ -205,5 +206,5 @@ header .nav-btn {
   nav a {
       font-size: 1.5rem;
   }
-}
+} */
 /* Navbar Section Style Ends Here */

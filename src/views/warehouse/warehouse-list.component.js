@@ -163,116 +163,127 @@ export default class WarehousesList extends Component {
             </div>
             <div className="col-md-10 m-0 p-0">
               <Navbar />
-              <div className="container p-3">
-                <div className="input-group mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search by name"
-                    value={searchName}
-                    onChange={this.onChangeSearchName}
-                  />
-                  <div className="input-group-append">
-                    <button
-                      className="btn btn-outline-secondary"
-                      type="button"
-                      onClick={this.retrieveWarehouses}
-                    >
-                      Search
-                    </button>
-                  </div>
-                </div>
+              <div className="container-fluid p-3">
                 <div className="row">
-                  <div className="col-md-6">
-                    <h4>Warehouses List</h4>
+                  <div className="col-md-12">
+                    <div className="">
+                      <div className="d-flex align-items-center justify-content-center">
+                        <Link to={"/warehouse-add"} className="btn btn-success mr-2">Add Warehouse</Link>
 
-                    <div className="mt-3">
-                      {"Items per Page: "}
-                      <select onChange={this.handlePageSizeChange} value={pageSize}>
-                        {this.pageSizes.map((size) => (
-                          <option key={size} value={size}>
-                            {size}
-                          </option>
-                        ))}
-                      </select>
+                        <button className="mr-3 btn btn-danger" onClick={this.removeAllWarehouses}>
+                          Remove All
+                        </button>
 
-                      <Pagination
-                        className="my-3"
-                        count={count}
-                        page={page}
-                        siblingCount={1}
-                        boundaryCount={1}
-                        variant="outlined"
-                        shape="rounded"
-                        onChange={this.handlePageChange}
-                      />
+                        <div className="input-group" style={{width: "unset"}}>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Search by name"
+                            value={searchName}
+                            onChange={this.onChangeSearchName}
+                          />
+                          <div className="input-group-append">
+                            <button
+                              className="btn btn-outline-secondary"
+                              type="button"
+                              onClick={this.retrieveWarehouses}
+                            >
+                              Search
+                            </button>
+                          </div>
+                        </div>
+
+                        <p className="ml-auto my-0 mr-2">{"Items per Page: "}</p>
+                        <select onChange={this.handlePageSizeChange} value={pageSize} className="btn btn-outline-info">
+                          {this.pageSizes.map((size) => (
+                            <option key={size} value={size}>
+                              {size}
+                            </option>
+                          ))}
+                        </select>
+
+                      </div>
                     </div>
 
-                    <ul className="list-group">
-                      {warehouses &&
-                        warehouses.map((warehouse, index) => (
-                          <li
-                            className={
-                              "list-group-item " +
-                              (index === currentIndex ? "active" : "")
-                            }
-                            onClick={() => this.setActiveWarehouse(warehouse, index)}
-                            key={index}
-                          >
-                            {warehouse.name}
-                          </li>
-                        ))}
-                    </ul>
+                    <div className="row">
+                      <div className="col-md-6 my-3">
+                        <h4>Warehouses List</h4>
 
-                    <button
-                      className="m-3 btn btn-sm btn-danger"
-                      onClick={this.removeAllWarehouses}
-                    >
-                      Remove All
-                  </button>
-                </div>
-                <div className="col-md-6">
-                  {currentWarehouse ? (
-                    <div>
-                      <h4>Warehouse</h4>
-                      <div>
-                        <label>
-                          <strong>Name:</strong>
-                        </label>{" "}
-                        {currentWarehouse.name}
+                        <ul className="list-group">
+                          {warehouses &&
+                            warehouses.map((warehouse, index) => (
+                              <li
+                                className={
+                                  "list-group-item " +
+                                  (index === currentIndex ? "active" : "")
+                                }
+                                onClick={() => this.setActiveWarehouse(warehouse, index)}
+                                key={index}
+                              >
+                                {warehouse.name}
+                              </li>
+                            ))}
+                        </ul>
+
+                        <div className="mt-3">
+                          <Pagination
+                            className="my-3"
+                            count={count}
+                            page={page}
+                            siblingCount={1}
+                            boundaryCount={1}
+                            variant="outlined"
+                            shape="rounded"
+                            onChange={this.handlePageChange}
+                          />
+                        </div>
+
                       </div>
-                      <div>
-                        <label>
-                          <strong>Location:</strong>
-                        </label>{" "}
-                        {currentWarehouse.location}
-                      </div>
-                      <div>
-                        <label>
-                          <strong>Description:</strong>
-                        </label>{" "}
-                        {currentWarehouse.description}
-                      </div>
-                      <div>
-                        <label>
-                          <strong>Status:</strong>
-                        </label>{" "}
-                        {currentWarehouse.published ? "Published" : "Pending"}
+                      <div className="col-md-6">
+                        {currentWarehouse ? (
+                          <div>
+                            <h4>Warehouse</h4>
+                            <div>
+                              <label>
+                                <strong>Name:</strong>
+                              </label>{" "}
+                              {currentWarehouse.name}
+                            </div>
+                            <div>
+                              <label>
+                                <strong>Location:</strong>
+                              </label>{" "}
+                              {currentWarehouse.location}
+                            </div>
+                            <div>
+                              <label>
+                                <strong>Description:</strong>
+                              </label>{" "}
+                              {currentWarehouse.description}
+                            </div>
+                            <div>
+                              <label>
+                                <strong>Status:</strong>
+                              </label>{" "}
+                              {currentWarehouse.published ? "Published" : "Pending"}
+                            </div>
+
+                            <Link
+                              to={"/warehouse/" + currentWarehouse.id}
+                              className="badge badge-warning"
+                            >
+                              Edit
+                            </Link>
+                          </div>
+                        ) : (
+                          <div>
+                            <br />
+                            <p>Please click on a Warehouse...</p>
+                          </div>
+                        )}
+                        </div>
                       </div>
 
-                      <Link
-                        to={"/warehouse/" + currentWarehouse.id}
-                        className="badge badge-warning"
-                      >
-                        Edit
-                      </Link>
-                    </div>
-                  ) : (
-                    <div>
-                      <br />
-                      <p>Please click on a Warehouse...</p>
-                    </div>
-                  )}
                   </div>
                 </div>
               </div>

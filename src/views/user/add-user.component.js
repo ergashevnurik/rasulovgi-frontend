@@ -97,7 +97,7 @@ export default class AddUser extends Component {
     const { currentUser } = this.state;
 
     return (
-      <section className="warehouse-list-section">
+      <section className="user-list-section">
         <div className="">
           <div className="row m-0 p-0">
             <div className="col-md-2 m-0 p-0">
