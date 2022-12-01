@@ -18,6 +18,10 @@ export default class UsersList extends Component {
   constructor(props) {
     super(props);
     this.onChangeSearchUsername = this.onChangeSearchUsername.bind(this);
+    this.onChangeSearchEmail = this.onChangeSearchEmail.bind(this);
+    this.onChangeSearchFirstName = this.onChangeSearchFirstName.bind(this);
+    this.onChangeSearchLastName = this.onChangeSearchLastName.bind(this);
+
     this.retrieveUsers = this.retrieveUsers.bind(this);
     this.refreshList = this.refreshList.bind(this);
     this.setActiveUser = this.setActiveUser.bind(this);
@@ -30,11 +34,14 @@ export default class UsersList extends Component {
       currentUser: null,
       currentIndex: -1,
       searchUsername: "",
+      searchEmail: "",
+      searchFirstName: '',
+      searchLastName: '',
 
       page: 1,
       count: 0,
       pageSize: 3,
-      urrentUser: { username: "" }
+      currentUser: { username: "" }
     };
 
     this.pageSizes = [3, 6, 9];
@@ -55,13 +62,57 @@ export default class UsersList extends Component {
     this.setState({
       searchUsername: searchUsername,
     });
+    
+    this.retrieveUsers();
   }
 
-  getRequestParams(searchUsername, page, pageSize) {
+  onChangeSearchEmail(e) {
+    const searchEmail = e.target.value;
+
+    this.setState({
+      searchEmail: searchEmail,
+    });
+    
+    this.retrieveUsers();
+  }
+
+  onChangeSearchFirstName(e) {
+    const searchFirstName = e.target.value;
+
+    this.setState({
+      searchFirstName: searchFirstName,
+    });
+    
+    this.retrieveUsers();
+  }
+
+  onChangeSearchLastName(e) {
+    const searchLastName = e.target.value;
+
+    this.setState({
+      searchLastName: searchLastName,
+    });
+    
+    this.retrieveUsers();
+  }
+
+  getRequestParams(searchFirstName, searchLastName, searchUsername, searchEmail, page, pageSize) {
     let params = {};
+
+    if (searchFirstName) {
+      params["firstName"] = searchFirstName;
+    }
+
+    if (searchLastName) {
+      params["lastName"] = searchLastName;
+    }
 
     if (searchUsername) {
       params["username"] = searchUsername;
+    }
+
+    if (searchEmail) {
+      params["email"] = searchEmail;
     }
 
     if (page) {
@@ -76,8 +127,8 @@ export default class UsersList extends Component {
   }
 
   retrieveUsers() {
-    const { searchUsername, page, pageSize } = this.state;
-    const params = this.getRequestParams(searchUsername, page, pageSize);
+    const { searchFirstName, searchLastName, searchUsername, searchEmail, page, pageSize } = this.state;
+    const params = this.getRequestParams(searchUsername, searchEmail, searchFirstName, searchLastName, page, pageSize);
 
     UserDataService.getAll(params)
       .then((response) => {
@@ -157,6 +208,9 @@ export default class UsersList extends Component {
       page,
       count,
       pageSize,
+      searchEmail,
+      searchFirstName,
+      searchLastName
     } = this.state;
 
     return (
@@ -181,14 +235,7 @@ export default class UsersList extends Component {
                           Remove All
                         </button>
 
-                        <div className="input-group mr-2" style={{width: "unset"}}>
-                          <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Search by name"
-                            value={searchUsername}
-                            onChange={this.onChangeSearchUsername}
-                          />
+                        {/* <div className="input-group mr-2" style={{width: "unset"}}>
                           <div className="input-group-append">
                             <button
                               className="btn btn-outline-secondary"
@@ -198,7 +245,7 @@ export default class UsersList extends Component {
                               Search
                             </button>
                           </div>
-                        </div>
+                        </div> */}
 
                         <p className="ml-auto my-0 mr-2">{"Items per Page: "}</p>
                         <select onChange={this.handlePageSizeChange} value={pageSize} className="btn btn-outline-info">
@@ -215,9 +262,46 @@ export default class UsersList extends Component {
                         <thead>
                           <tr>
                             <th>ID</th>
+                            <th>First name</th>
+                            <th>Last name</th>
                             <th>Username</th>
                             <th>Email</th>
                             <th>Actions</th>
+                          </tr>
+                          <tr>
+                            <th><input type={"checkbox"} /></th>
+                            <th>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Search by first name"
+                                value={searchFirstName}
+                                onChange={this.onChangeSearchFirstName}/>
+                            </th>
+                            <th>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Search by last name"
+                                value={searchLastName}
+                                onChange={this.onChangeSearchLastName}/>
+                            </th>
+                            <th>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Search by username"
+                                value={searchUsername}
+                                onChange={this.onChangeSearchUsername}/>
+                            </th>
+                            <th>
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Search by email"
+                                value={searchEmail}
+                                onChange={this.onChangeSearchEmail}/>
+                            </th>
                           </tr>
                         </thead>
 
@@ -225,10 +309,15 @@ export default class UsersList extends Component {
                           users.map((user, index) => (
                             <tbody key={index}>
                               <tr data-toggle="collapse" data-target={'.multi-collapse' + (index)} aria-controls={'multiCollapseExample' + (index)} className={(index === currentIndex ? "active" : "")} onClick={() => this.setActiveUser(user, index)}>
-                                <td>{user.id}</td>
+                                <td><input type={"checkbox"} value={user.id} /></td>
+                                <td>{user.firstName}</td>
+                                <td>{user.lastName}</td>
                                 <td>{user.username}</td>
                                 <td>{user.email}</td>
-                                <td></td>
+                                <td>
+                                  <Link to={"/user/" + currentUser.id} className="btn btn-warning mr-1">Edit</Link>
+                                  <Link to={"/user/" + currentUser.id} className="btn btn-danger">Delete</Link>
+                                </td>
                               </tr>
                               <tr className={'collapse multi-collapse' + (index)} id={'multiCollapseExample' + (index)}>
                                   <td></td>
