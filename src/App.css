@@ -128,9 +128,19 @@ label {
 
 
 /* Aside Section Style Goes Here */
-.aside-section {
+.aside-container-panel {
   height: 100vh;
-  background-color: whitesmoke;
+  background-image: url(https://rasulov.uz/thumb/2/Ayf9JVBqVJGr7LxhF1CqBw/1920r1333/d/2_234.jpg);
+  background-size: cover;
+  background-position: 81%;
+  background-repeat: no-repeat;
+  z-index: 99;
+  position: relative;
+}
+
+.aside-section {
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 /* Aside Section Style Ends Here */
 
