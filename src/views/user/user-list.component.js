@@ -220,7 +220,7 @@ export default class UsersList extends Component {
             <div className="col-md-2 aside-container-panel m-0 p-0">
               <Sidebar />
             </div>
-            <div className="col-md-10 m-0 p-0">
+            <div className="col-md-9 m-0 p-0">
               <Navbar />
               <div className="container-fluid p-3">
 

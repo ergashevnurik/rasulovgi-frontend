@@ -130,15 +130,23 @@ label {
 /* Aside Section Style Goes Here */
 .aside-container-panel {
   height: 100vh;
-  background-image: url(https://rasulov.uz/thumb/2/Ayf9JVBqVJGr7LxhF1CqBw/1920r1333/d/2_234.jpg);
+  background-image: url(https://rasulov.uz/thumb/2/BV_CIoeFh7IC7F-sClPNIA/1920r1333/d/3_11.jpg);
   background-size: cover;
-  background-position: 81%;
+  background-position: right;
   background-repeat: no-repeat;
   z-index: 99;
   position: relative;
+  width: 300px!important;
+  max-width: 300px!important;
+  flex: unset!important;
 }
 
 .aside-section {
+  position: fixed;
+  width: 300px;
+  top: 0;
+  bottom: 0;
+  left: 0;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
 }
@@ -218,3 +226,10 @@ header .nav-btn {
   }
 } */
 /* Navbar Section Style Ends Here */
+
+/* Col-md-9 Style Goes here */
+.col-md-9 {
+  flex: unset!important;
+  max-width: calc(100% - 300px);
+}
+/* Col-md-9 Style Ends here */

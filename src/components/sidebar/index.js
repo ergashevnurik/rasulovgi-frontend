@@ -20,17 +20,17 @@ export default class Sidebar extends Component {
         </div>
         <hr></hr>
         <div className='row px-3 py-2'>
-          <Link to={"/dashboard"} className="btn w-100 text-left text-dark d-flex align-items-center">
+          <Link to={"/dashboard"} className="btn w-100 text-left text-white d-flex align-items-center">
             <MdDashboard className='mx-2' /> Dashboard
           </Link>
         </div>
         <div className='row px-3 py-2'>
-          <Link to={"/user"} className="btn w-100 text-left text-dark d-flex align-items-center">
+          <Link to={"/user"} className="btn w-100 text-left text-white d-flex align-items-center">
             <FiUsers className='mx-2' />Users
           </Link>
         </div>
         <div className='row px-3 py-2'>
-          <Link to={"/warehouse"} className="btn w-100 text-left text-dark d-flex align-items-center">
+          <Link to={"/warehouse"} className="btn w-100 text-left text-white d-flex align-items-center">
             <FaWarehouse className='mx-2' />Warehouses
           </Link>
         </div>
