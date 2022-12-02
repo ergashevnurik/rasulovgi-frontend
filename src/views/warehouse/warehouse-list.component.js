@@ -155,7 +155,7 @@ export default class WarehousesList extends Component {
     } = this.state;
 
     return (
-      <section className="warehouse-list-section">
+      <section className="warehouse-list-section aside-container-panel">
         <div className="">
           <div className="row m-0 p-0">
             <div className="col-md-2 aside-container-panel m-0 p-0">
