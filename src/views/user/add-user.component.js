@@ -10,6 +10,13 @@ export default class AddUser extends Component {
     super(props);
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeFirstName = this.onChangeFirstName.bind(this);
+    this.onChangeLastName = this.onChangeLastName.bind(this);
+
+    this.onChangeAge = this.onChangeAge.bind(this);
+    this.onChangeAddress = this.onChangeAddress.bind(this);
+    this.onChangePhoneNumber = this.onChangePhoneNumber.bind(this);
+
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.saveUser = this.saveUser.bind(this);
     this.newUser = this.newUser.bind(this);
@@ -18,7 +25,12 @@ export default class AddUser extends Component {
       id: null,
       username: "",
       password: "",
+      firstName: '',
+      lastName: '',
       email: "",
+      age: 0,
+      address: '',
+      phoneNumber: '',
       active: false,
 
       submitted: false,
@@ -52,11 +64,46 @@ export default class AddUser extends Component {
     });
   }
 
+  onChangeFirstName(e) {
+    this.setState({
+      firstName: e.target.value
+    });
+  }
+
+  onChangeLastName(e) {
+    this.setState({
+      lastName: e.target.value
+    });
+  }
+
+  onChangeAddress(e) {
+    this.setState({
+      address: e.target.value
+    });
+  }
+
+  onChangeAge(e) {
+    this.setState({
+      age: e.target.value
+    });
+  }
+
+  onChangePhoneNumber(e) {
+    this.setState({
+      phoneNumber: e.target.value
+    });
+  }
+
   saveUser() {
     var data = {
       username: this.state.username,
       password: this.state.password,
-      email: this.state.email
+      email: this.state.email,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      age: this.state.age,
+      phoneNumber: this.state.phoneNumber,
+      address: this.state.address
     };
 
     UserDataService.create(data)
@@ -66,7 +113,12 @@ export default class AddUser extends Component {
           username: response.data.username,
           password: response.data.password,
           email: response.data.email,
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
           active: response.data.active,
+          age: response.data.age,
+          phoneNumber: response.data.phoneNumber,
+          address: response.data.address,
 
           submitted: true
         });
@@ -83,7 +135,12 @@ export default class AddUser extends Component {
       username: "",
       password: "",
       email: "",
+      firstName: "",
+      lastName: "",
       active: false,
+      age: 0,
+      address: '',
+      phoneNumber: '',
 
       submitted: false
     });
@@ -126,6 +183,71 @@ export default class AddUser extends Component {
                           value={this.state.username}
                           onChange={this.onChangeUsername}
                           name="username"
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="firstName">First name</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="username"
+                          required
+                          value={this.state.firstName}
+                          onChange={this.onChangeFirstName}
+                          name="firstName"
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="lastName">Last name</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="lastName"
+                          required
+                          value={this.state.lastName}
+                          onChange={this.onChangeLastName}
+                          name="lastName"
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="phoneNumber">Phone Number</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="phoneNumber"
+                          required
+                          value={this.state.phoneNumber}
+                          onChange={this.onChangePhoneNumber}
+                          name="phoneNumber"
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="address">Address</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="address"
+                          required
+                          value={this.state.address}
+                          onChange={this.onChangeAddress}
+                          name="address"
+                        />
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="age">Age</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          id="age"
+                          required
+                          value={this.state.age}
+                          onChange={this.onChangeAge}
+                          name="age"
                         />
                       </div>
 

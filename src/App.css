@@ -130,33 +130,134 @@ label {
 /* Aside Section Style Goes Here */
 .aside-container-panel {
   height: 100vh;
-  background-image: url(https://rasulov.uz/thumb/2/BV_CIoeFh7IC7F-sClPNIA/1920r1333/d/3_11.jpg);
+  /* background-image: url(https://rasulov.uz/thumb/2/BV_CIoeFh7IC7F-sClPNIA/1920r1333/d/3_11.jpg);
   background-size: cover;
   background-position: right;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
+  background-color: white;
   z-index: 99;
   position: relative;
   width: 300px!important;
   max-width: 300px!important;
   flex: unset!important;
+  box-shadow: 0 32px 32px 0px rgba(0, 0, 0, 0.1);
 }
 
 .aside-section {
   position: fixed;
-  width: 300px;
-  top: 0;
+  background: white;
   bottom: 0;
   left: 0;
+  top: 0;
+  width: 300px;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profile-card {
+  border-radius: 30px;
+  padding: 60px 25px 25px;
+  background: linear-gradient(135deg, #ff9021 0%, #aa240a 100%);
+  text-align: center;
+  color: white;
+}
+
+.profile-card-head {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    border: 5px solid;
+    border-color: white;
+    background: linear-gradient(135deg, #ff9021 0%, #aa240a 100%);
+    border-radius: 50%;
+    width: 94px;
+    height: 94px;
+    -webkit-margin-start: auto;
+    margin-inline-start: auto;
+    -webkit-margin-end: auto;
+    margin-inline-end: auto;
+    position: absolute;
+    left: 50%;
+    top: -47px;
+    -webkit-transform: translate(-50%, 0%);
+    -moz-transform: translate(-50%, 0%);
+    -ms-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+}
+
+.profile-card h1 {
+  font-size: 24px!important;
+}
+
+.profile-card-body a {
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: relative;
+    white-space: nowrap;
+    vertical-align: middle;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    width: auto;
+    line-height: 1.2;
+    border-radius: 16px;
+    font-weight: regular;
+    transition: all .3s ease;
+    box-shadow: 45px 76px 113px 7px rgb(112 144 176 / 8%);
+    -webkit-transition: .25s all ease;
+    transition: .25s all ease;
+    box-sizing: border-box;
+    height: 2.5rem;
+    min-width: 185px;
+    font-size: 0.875rem;
+    -webkit-padding-start: 12px 25px;
+    padding-inline-start: 12px 25px;
+    -webkit-padding-end: 12px 25px;
+    padding-inline-end: 12px 25px;
+    background: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+    -webkit-margin-start: auto;
+    margin-inline-start: auto;
+    -webkit-margin-end: auto;
+    margin-inline-end: auto;
+    text-decoration: none;
 }
 /* Aside Section Style Ends Here */
 
 
 /* Navbar Section Style Goes Here */
 .navbar {
-  background-color: whitesmoke;
-}
+  background-color: white;
+  box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.1);
+ }
 /* 
 :root {
   --mainColor: #29335C;
@@ -231,6 +332,7 @@ header .nav-btn {
 .col-md-9 {
   flex: unset!important;
   max-width: calc(100% - 300px);
+  background-color: whitesmoke;
 }
 /* Col-md-9 Style Ends here */
 
@@ -244,3 +346,35 @@ header .nav-btn {
 .content-wrap{
   flex: 1;
 }
+
+
+/* Constant Goes Here */
+.active {
+  background: linear-gradient(135deg, #ff9021 0%, #aa240a 100%);
+  border: 0;
+  color: white;
+}
+
+.table td, .table th {
+  vertical-align: middle;
+}
+
+.bg-gradient-styled:focus {
+  box-shadow: 0;
+  border: 0;
+  outline: 0;
+}
+
+.font-lg {
+  font-size: 24px;
+  text-transform: lowercase;
+}
+/* Constant Ends Here */
+
+
+/* Dashboard UI Goes Here */
+.dashboard-section .card.rounded p {
+  font-size: 12px;
+  color: rgb(133, 133, 133);
+}
+/* Dashboard UI Ends Here */

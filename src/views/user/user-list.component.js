@@ -12,7 +12,8 @@ import { Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // To make rows collapsible
 import "bootstrap/js/src/collapse.js";
-
+import {IoIosAddCircle} from 'react-icons/io';
+import {FaTrashAlt} from 'react-icons/fa';
 
 export default class UsersList extends Component {
   constructor(props) {
@@ -229,10 +230,10 @@ export default class UsersList extends Component {
                     <div className="">
 
                       <div className="d-flex align-items-center justify-content-center">
-                        <Link to={"/user-add"} className="btn btn-success mr-2">Add User</Link>
+                        <Link to={"/user-add"} className="btn btn-success mr-2"><IoIosAddCircle /></Link>
 
                         <button className="btn btn-danger mr-2" onClick={this.removeAllUsers}>
-                          Remove All
+                          <FaTrashAlt />
                         </button>
 
                         {/* <div className="input-group mr-2" style={{width: "unset"}}>

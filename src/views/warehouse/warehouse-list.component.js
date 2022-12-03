@@ -6,6 +6,9 @@ import AuthService from "../../services/auth.service";
 import { Navigate } from "react-router-dom";
 import Navbar from '../../components/navbar/navbar';
 import Sidebar from "../../components/sidebar/index";
+import {IoIosAddCircle} from 'react-icons/io';
+import {FaTrashAlt} from 'react-icons/fa';
+import {BiSearchAlt} from 'react-icons/bi';
 
 
 export default class WarehousesList extends Component {
@@ -155,7 +158,7 @@ export default class WarehousesList extends Component {
     } = this.state;
 
     return (
-      <section className="warehouse-list-section aside-container-panel">
+      <section className="warehouse-list-section">
         <div className="">
           <div className="row m-0 p-0">
             <div className="col-md-2 aside-container-panel m-0 p-0">
@@ -168,10 +171,10 @@ export default class WarehousesList extends Component {
                   <div className="col-md-12">
                     <div className="">
                       <div className="d-flex align-items-center justify-content-center">
-                        <Link to={"/warehouse-add"} className="btn btn-success mr-2">Add Warehouse</Link>
+                        <Link to={"/warehouse-add"} className="btn btn-success mr-2"><IoIosAddCircle /></Link>
 
                         <button className="mr-3 btn btn-danger" onClick={this.removeAllWarehouses}>
-                          Remove All
+                          <FaTrashAlt/>
                         </button>
 
                         <div className="input-group" style={{width: "unset"}}>
@@ -188,7 +191,7 @@ export default class WarehousesList extends Component {
                               type="button"
                               onClick={this.retrieveWarehouses}
                             >
-                              Search
+                              <BiSearchAlt />
                             </button>
                           </div>
                         </div>
@@ -215,7 +218,7 @@ export default class WarehousesList extends Component {
                               <li
                                 className={
                                   "list-group-item " +
-                                  (index === currentIndex ? "active" : "")
+                                  (index === currentIndex ? "active bg-gradient-styled" : "")
                                 }
                                 onClick={() => this.setActiveWarehouse(warehouse, index)}
                                 key={index}
@@ -270,7 +273,7 @@ export default class WarehousesList extends Component {
 
                             <Link
                               to={"/warehouse/" + currentWarehouse.id}
-                              className="badge badge-warning"
+                              className="mt-3 btn btn-warning"
                             >
                               Edit
                             </Link>
