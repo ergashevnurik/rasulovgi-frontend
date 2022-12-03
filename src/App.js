@@ -22,6 +22,7 @@ import AddUser from "./views/user/add-user.component";
 import UsersList from "./views/user/user-list.component";
 import User from "./views/user/user.component";
 import Navbar1 from "./components/navbar/navbar1";
+import Dashboard from "./views/dashboard/dashboard.component";
 
 class App extends Component {
   
@@ -46,6 +47,10 @@ class App extends Component {
             <Route path="/user-add" element={<AddUser/>} />
             <Route path="/user/:id" element={<User/>} />
             {/* User Routes Ends Here */}
+
+            {/* Dashboard Routes Goes Here */}
+            <Route path="/dashboard" element={<Dashboard />} />
+            {/* Dashboard Routes Ends Here */}
 
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
