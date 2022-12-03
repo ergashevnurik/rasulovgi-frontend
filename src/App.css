@@ -338,9 +338,14 @@ header .nav-btn {
 
 
 /* Constant Goes Here */
-.bg-gradient-styled {
+.active {
   background: linear-gradient(135deg, #ff9021 0%, #aa240a 100%);
   border: 0;
+  color: white;
+}
+
+.table td, .table th {
+  vertical-align: middle;
 }
 
 .bg-gradient-styled:focus {
@@ -348,4 +353,17 @@ header .nav-btn {
   border: 0;
   outline: 0;
 }
+
+.font-lg {
+  font-size: 24px;
+  text-transform: lowercase;
+}
 /* Constant Ends Here */
+
+
+/* Dashboard UI Goes Here */
+.dashboard-section .card.rounded p {
+  font-size: 12px;
+  color: rgb(133, 133, 133);
+}
+/* Dashboard UI Ends Here */

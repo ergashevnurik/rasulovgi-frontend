@@ -3,6 +3,8 @@ import Navbar from '../../components/navbar/navbar';
 import Sidebar from "../../components/sidebar/index";
 import AuthService from "../../services/auth.service";
 import { Navigate } from "react-router-dom";
+import { FaIcons } from 'react-icons/fa';
+import {MdProductionQuantityLimits} from 'react-icons/md';
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -41,8 +43,16 @@ export default class Dashboard extends Component {
                 <div className="row">
                   <div className="col-md-12">
                     <div className="">
-                      <div className="d-flex align-items-center justify-content-center">
-                        
+                      <div className="d-flex align-items-center">
+                        <div className='card m-2 rounded'>
+                          <div className='m-2 d-flex justify-content-between flex-row align-items-center p-3'>
+                            <MdProductionQuantityLimits className=' font-lg' />
+                            <div className='ml-5 text-right'>
+                              <h2 className='p-0 m-0 font-lg'>1232</h2>
+                              <p className='p-0 m-0'>In Warehouse</p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
