@@ -5,6 +5,7 @@ import { Navigate } from "react-router-dom";
 import { withRouter } from '../../common/with-router';
 import Navbar from '../../components/navbar/navbar';
 import Sidebar from "../../components/sidebar/index";
+import Footer from "../../components/footer/footer";
 
 class Warehouse extends Component {
   constructor(props) {
@@ -240,6 +241,7 @@ class Warehouse extends Component {
                   </div>
                 )}
               </div>
+              <Footer />
             </div>
           </div>
         </div>

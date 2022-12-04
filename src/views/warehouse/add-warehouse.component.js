@@ -4,6 +4,7 @@ import AuthService from "../../services/auth.service";
 import { Navigate } from "react-router-dom";
 import Navbar from '../../components/navbar/navbar';
 import Sidebar from "../../components/sidebar/index";
+import Footer from "../../components/footer/footer";
 
 export default class AddWarehouse extends Component {
   constructor(props) {
@@ -161,6 +162,7 @@ export default class AddWarehouse extends Component {
                     </div>
                   )}
                 </div>
+                <Footer />
               </div>
             </div>
           </div>

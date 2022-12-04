@@ -9,6 +9,7 @@ import Sidebar from "../../components/sidebar/index";
 import {IoIosAddCircle} from 'react-icons/io';
 import {FaTrashAlt} from 'react-icons/fa';
 import {BiSearchAlt} from 'react-icons/bi';
+import Footer from "../../components/footer/footer";
 
 
 export default class WarehousesList extends Component {
@@ -290,6 +291,7 @@ export default class WarehousesList extends Component {
                   </div>
                 </div>
               </div>
+              <Footer />
             </div>
           </div>
         </div>

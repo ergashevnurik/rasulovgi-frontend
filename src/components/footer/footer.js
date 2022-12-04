@@ -8,7 +8,7 @@ const Footer  = () => {
                 <hr />
                 <div className="row">
                     <p className="col-sm">
-                        &copy;{new Date().getFullYear()} THICC MEMES INC | All right resevred | Terms Of Serivce | Privacy 
+                        &copy;{new Date().getFullYear()} MENZ | All right resevred | Terms Of Serivce | Privacy 
                     </p>
                 </div>
             </div>
