@@ -22,17 +22,20 @@ import AddUser from "./views/user/add-user.component";
 import UsersList from "./views/user/user-list.component";
 import User from "./views/user/user.component";
 import Navbar1 from "./components/navbar/navbar1";
+import Footer from "./components/footer/footer";
+
 import Dashboard from "./views/dashboard/dashboard.component";
 
 class App extends Component {
   
 
   render() {
-    
 
     return (
-      <div>
-        <div>
+
+      <div className="page-container">
+        <div className="content-wrap">
+
           <Routes>
             <Route path="/" element={<Login />} />
             
@@ -59,6 +62,8 @@ class App extends Component {
             <Route path="/mod" element={<BoardModerator />} />
             <Route path="/admin" element={<BoardAdmin />} />
           </Routes>
+
+          <Footer />
         </div>
 
         {/* <AuthVerify logOut={this.logOut}/> */}
