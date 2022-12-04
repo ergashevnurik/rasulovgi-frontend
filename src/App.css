@@ -367,3 +367,35 @@ header .nav-btn {
   color: rgb(133, 133, 133);
 }
 /* Dashboard UI Ends Here */
+
+
+/* Card User Add Goes Here */
+.user-add-section .card.relative {
+  position: relative;
+  border-radius: 15px;
+  padding: 25px 50px;
+  text-align: center;
+  background: linear-gradient(135deg, #ff9021 0%, #aa240a 100%);
+  color: white;
+}
+
+.user-add-section .card.relative .card-head {
+  margin-bottom: 55px;
+}
+
+.card-image {
+  position: absolute;
+  left: 50%;
+  bottom: -60px;
+  -webkit-transform: translate(-50%, 0%);
+  -moz-transform: translate(-50%, 0%);
+  -ms-transform: translate(-50%, 0%);
+  transform: translate(-50%, 0%);
+  height: 127px;
+  width: 127px;
+  border: 5px solid white;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff9021 0%, #aa240a 100%);
+}
+
+/* Card User Add Ends Here */

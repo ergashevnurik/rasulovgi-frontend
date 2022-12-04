@@ -268,7 +268,7 @@ export default class WarehousesList extends Component {
                               <label>
                                 <strong>Status:</strong>
                               </label>{" "}
-                              {currentWarehouse.published ? "Published" : "Pending"}
+                              {currentWarehouse.active ? "Active" : "Inactive"}
                             </div>
 
                             <Link

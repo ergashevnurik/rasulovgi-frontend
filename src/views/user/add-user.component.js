@@ -12,6 +12,8 @@ export default class AddUser extends Component {
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onChangeFirstName = this.onChangeFirstName.bind(this);
     this.onChangeLastName = this.onChangeLastName.bind(this);
+    this.onChangeMiddleName = this.onChangeMiddleName.bind(this);
+    this.onChangeRole = this.onChangeRole.bind(this);
 
     this.onChangeAge = this.onChangeAge.bind(this);
     this.onChangeAddress = this.onChangeAddress.bind(this);
@@ -32,10 +34,13 @@ export default class AddUser extends Component {
       address: '',
       phoneNumber: '',
       active: false,
+      middleName: '',
 
       submitted: false,
       currentUser: { username: "" }
     };
+
+    this.roles = ['ROLE_INVENTOR', 'ROLE_ADMIN', 'ROLE_USER', 'ROLE_ACCOUNTANT'];
   }
 
   componentDidMount() {
@@ -94,6 +99,18 @@ export default class AddUser extends Component {
     });
   }
 
+  onChangeMiddleName(e) {
+    this.setState({
+      middleName: e.target.value
+    });
+  }
+
+  onChangeRole(e) {
+    this.setState({
+      roles: e.target.value
+    });
+  }
+
   saveUser() {
     var data = {
       username: this.state.username,
@@ -103,7 +120,8 @@ export default class AddUser extends Component {
       lastName: this.state.lastName,
       age: this.state.age,
       phoneNumber: this.state.phoneNumber,
-      address: this.state.address
+      address: this.state.address,
+      middleName: this.state.middleName
     };
 
     UserDataService.create(data)
@@ -119,6 +137,7 @@ export default class AddUser extends Component {
           age: response.data.age,
           phoneNumber: response.data.phoneNumber,
           address: response.data.address,
+          middleName: response.data.middleName,
 
           submitted: true
         });
@@ -141,6 +160,7 @@ export default class AddUser extends Component {
       age: 0,
       address: '',
       phoneNumber: '',
+      middleName: '',
 
       submitted: false
     });
@@ -154,7 +174,7 @@ export default class AddUser extends Component {
     const { currentUser } = this.state;
 
     return (
-      <section className="user-list-section">
+      <section className="user-add-section">
         <div className="">
           <div className="row m-0 p-0">
             <div className="col-md-2 aside-container-panel m-0 p-0">
@@ -162,7 +182,7 @@ export default class AddUser extends Component {
             </div>
             <div className="col-md-9 m-0 p-0">
               <Navbar />
-              <div className="container p-3">
+              <div className="container-fluid p-3">
                 <div className="submit-form">
                   {this.state.submitted ? (
                     <div>
@@ -172,114 +192,164 @@ export default class AddUser extends Component {
                       </button>
                     </div>
                   ) : (
-                    <div>
-                      <div className="form-group">
-                        <label htmlFor="username">Username</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="username"
-                          required
-                          value={this.state.username}
-                          onChange={this.onChangeUsername}
-                          name="username"
-                        />
+                    <div className="row flex-nowrap">
+
+                      <div className="col-md-3">
+                        <div className="card relative">
+                          <div className="card-head">
+                            <h1>Hello</h1>
+                          </div>
+                          <div className="card-image"></div> 
+                        </div>
                       </div>
 
-                      <div className="form-group">
-                        <label htmlFor="firstName">First name</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="username"
-                          required
-                          value={this.state.firstName}
-                          onChange={this.onChangeFirstName}
-                          name="firstName"
-                        />
-                      </div>
+                      <div className="col-md-9">
+                        <div className="form-row">
+                          <div className="form-group col-md-6">
+                            <label htmlFor="username">Username</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="username"
+                              required
+                              value={this.state.username}
+                              onChange={this.onChangeUsername}
+                              name="username"
+                            />
+                          </div>
 
-                      <div className="form-group">
-                        <label htmlFor="lastName">Last name</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="lastName"
-                          required
-                          value={this.state.lastName}
-                          onChange={this.onChangeLastName}
-                          name="lastName"
-                        />
-                      </div>
+                          <div className="form-group col-md-6">
+                            <label htmlFor="email">Email</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="email"
+                              required
+                              value={this.state.email}
+                              onChange={this.onChangeEmail}
+                              name="email"
+                            />
+                          </div>
+                          
+                        </div>
 
-                      <div className="form-group">
-                        <label htmlFor="phoneNumber">Phone Number</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="phoneNumber"
-                          required
-                          value={this.state.phoneNumber}
-                          onChange={this.onChangePhoneNumber}
-                          name="phoneNumber"
-                        />
-                      </div>
+                        <div className="form-row">
+                          <div className="form-group col-md-4">
+                            <label htmlFor="lastName">Last name</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="lastName"
+                              required
+                              value={this.state.lastName}
+                              onChange={this.onChangeLastName}
+                              name="lastName"
+                            />
+                          </div>
 
-                      <div className="form-group">
-                        <label htmlFor="address">Address</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="address"
-                          required
-                          value={this.state.address}
-                          onChange={this.onChangeAddress}
-                          name="address"
-                        />
-                      </div>
+                          <div className="form-group col-md-4">
+                            <label htmlFor="firstName">First name</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="username"
+                              required
+                              value={this.state.firstName}
+                              onChange={this.onChangeFirstName}
+                              name="firstName"
+                            />
+                          </div>
 
-                      <div className="form-group">
-                        <label htmlFor="age">Age</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="age"
-                          required
-                          value={this.state.age}
-                          onChange={this.onChangeAge}
-                          name="age"
-                        />
-                      </div>
+                          <div className="form-group col-md-4">
+                            <label htmlFor="middleName">Middle name</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="middleName"
+                              required
+                              value={this.state.middleName}
+                              onChange={this.onChangeMiddleName}
+                              name="middleName"
+                            />
+                          </div>
+                        </div>
 
-                      <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="password"
-                          required
-                          value={this.state.password}
-                          onChange={this.onChangePassword}
-                          name="password"
-                        />
-                      </div>
+                        <div className="form-row">
+                          <div className="form-group col-md-4">
+                            <label htmlFor="phoneNumber">Phone Number</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="phoneNumber"
+                              required
+                              value={this.state.phoneNumber}
+                              onChange={this.onChangePhoneNumber}
+                              name="phoneNumber"
+                            />
+                          </div>
 
-                      <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="email"
-                          required
-                          value={this.state.email}
-                          onChange={this.onChangeEmail}
-                          name="email"
-                        />
-                      </div>
+                          <div className="form-group col-md-4">
+                            <label htmlFor="address">Address</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="address"
+                              required
+                              value={this.state.address}
+                              onChange={this.onChangeAddress}
+                              name="address"
+                            />
+                          </div>
 
-                      <button onClick={this.saveUser} className="btn btn-success">
-                        Submit
-                      </button>
+                          <div className="form-group col-md-4">
+                            <label htmlFor="age">Age</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="age"
+                              required
+                              value={this.state.age}
+                              onChange={this.onChangeAge}
+                              name="age"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="form-row">
+                          <div className="form-group col-md-4">
+                            <label htmlFor="role">Role</label>
+                            <select onChange={this.onChangeRole} value={this.state.role} className='form-control'>
+                              {this.roles.map((role) => (
+                                <option key={role} value={role}>
+                                  {role}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          <div className="form-group col-md-4">
+                            <label htmlFor="password">Password</label>
+                            <input
+                              type="text"
+                              className="form-control"
+                              id="password"
+                              required
+                              value={this.state.password}
+                              onChange={this.onChangePassword}
+                              name="password"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="form-row">
+                          <div className="form-group col-md-4">
+                            <button onClick={this.saveUser} className="btn btn-success">
+                              Submit
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      
                     </div>
                   )}
                 </div>
